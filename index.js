@@ -1,5 +1,5 @@
-// 1. Получение размера рабочей области.
-// 2. Написать функцию генерирующую рандомные координаты(X,Y).
+// 1. Получение размера рабочей области. +
+// 2. Написать функцию генерирующую рандомные координаты(X,Y). +
 // 3. Написать анимацию появление падающих элементов.
 // 4. Написать счетчик элементов (<=10).
 // 5. Написать функцию подсчета кол-во набранных баллов.
@@ -36,26 +36,39 @@ windowHeight.textContent = `Heigth: ${getHeight}`;
       
   //   // }
   // }
-  
+
   let i = 0;
+  let randomY = 0;
+  let randomX = 0;
   
-  while (i < elements.length) {
-    function getRandomCoordinates(minY, maxY, minX, maxX, elements) {
-      minY = Math.ceil(minY);
-      maxY = Math.floor(maxY);
-      minX = Math.ceil(minX);
-      maxX = Math.floor(maxX);
-      
-      const randomY = Math.floor(Math.random() * (maxY - minY)) + minY;
-      const randomX = Math.floor(Math.random() * (maxX - minX)) + minX;
-      
-      console.log(`randomY: ${randomY}`);
-      console.log(`randomX: ${randomX}`);
-      return randomX;
-    }
+  function getRandomCoordinates(minY, maxY, minX, maxX) {
+    minY = Math.ceil(minY);
+    maxY = Math.floor(maxY);
+    minX = Math.ceil(minX);
+    maxX = Math.floor(maxX);
     
-    getRandomCoordinates(0, getHeight, 0, getWidth, elements);
-    // elements[i].style.cssText = `left: ${randomX}px`
-    console.log(elements[i]);
-    i++;
+    const locRandomY = Math.floor(Math.random() * (maxY - minY)) + minY;
+    const locRandomX = Math.floor(Math.random() * (maxX - minX)) + minX;
+    
+    console.log(`randomY: ${locRandomY}`);
+    console.log(`randomX: ${locRandomX}`);
+
+    randomY = locRandomY;
+    randomX = locRandomX;
+    return;
   }
+
+  elements.forEach(function (item, value) {
+    getRandomCoordinates(0, getHeight, 0, getWidth, elements);
+    console.log(`item: ${item} --- value: ${value}`);
+    item.style.cssText = `top: ${randomY}px; left: ${randomX}px`
+  })
+  
+  // while (i < elements.length) {
+  //   getRandomCoordinates(0, getHeight, 0, getWidth, elements);
+  //   console.log(randomY, randomX);
+
+  //   console.log(elements[i]);
+  //   elements[i].style.cssText = `top: ${randomY}px; left: ${randomX}px`
+  //   i++;
+  // }
