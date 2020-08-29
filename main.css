@@ -5,15 +5,10 @@ body {
 .box {
   height: 25px;
   width: 25px;
+  line-height: 25px;
   border: 1px solid red;
   position: absolute;
-}
-
-#element2 {
-  height: 25px;
-  width: 25px;
-  border: 1px solid blue;
-  position: absolute;
-  top: 25%;
-  left: 25%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
