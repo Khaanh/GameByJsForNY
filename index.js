@@ -6,69 +6,55 @@
 
 let getWidth      = document.body.clientWidth,
 getHeight     = window.innerHeight,
-windowWidth   = document.getElementById('js-width'),
-windowHeight  = document.getElementById('js-height'),
+windowWidth   = document.getElementById('js-width').textContent = `Width: ${getWidth}`,
+windowHeight  = document.getElementById('js-height').textContent = `Heigth: ${getHeight}`,
 elements      = document.querySelectorAll('.box');
 
-windowWidth.textContent = `Width: ${getWidth}`;
-windowHeight.textContent = `Heigth: ${getHeight}`;
+// windowWidth.textContent = `Width: ${getWidth}`;
+// windowHeight.textContent = `Heigth: ${getHeight}`;
 
-// Получение случайного целого числа в заданном интервале для значении X,Y
-// getRandomCoordinates(0, getHeight, 0, getWidth)
-  // function getRandomCoordinates(minY, maxY, minX, maxX, elements) {
-  //   minY = Math.ceil(minY);
-  //   maxY = Math.floor(maxY);
-  //   minX = Math.ceil(minX);
-  //   maxX = Math.floor(maxX);
-    
-  //   const randomY = Math.floor(Math.random() * (maxY - minY)) + minY;
-  //   const randomX = Math.floor(Math.random() * (maxX - minX)) + minX;
-    
-  //   // elements.setAttribute('style', `top: ${randomY}px; left: ${randomX}px`)
-  //   // element.style.cssText = `top: ${randomY}px; left: ${randomX}px`;
-    
-  //   console.log(`randomY: ${randomY}`);
-  //   console.log(`randomX: ${randomX}`);
+let randomY = 0;
+let randomX = 0;
 
-  //   // for (let i = 0; i < elements.length; i++) {
-  //   //   console.log(elements[i]);
-  //   //   elements[i].style.cssText = `top: ${randomY}px; left: ${randomX}px`;
-      
-  //   // }
-  // }
-
-  let i = 0;
-  let randomY = 0;
-  let randomX = 0;
-  
+// Получение случайного целого числа в заданном интервале для значении X, Y
   function getRandomCoordinates(minY, maxY, minX, maxX) {
     minY = Math.ceil(minY);
     maxY = Math.floor(maxY);
     minX = Math.ceil(minX);
     maxX = Math.floor(maxX);
     
-    const locRandomY = Math.floor(Math.random() * (maxY - minY)) + minY;
-    const locRandomX = Math.floor(Math.random() * (maxX - minX)) + minX;
+    let locRandomY = Math.floor(Math.random() * (maxY - minY)) + minY;
+    let locRandomX = Math.floor(Math.random() * (maxX - minX)) + minX;
     
-    console.log(`randomY: ${locRandomY}`);
-    console.log(`randomX: ${locRandomX}`);
+    // console.log(`randomY: ${locRandomY}`);
+    // console.log(`randomX: ${locRandomX}`);
 
     randomY = locRandomY;
     randomX = locRandomX;
     return;
   }
 
-  elements.forEach(function (item, value) {
+  let totalInput = document.getElementById('total-input');
+  let counter = 0;
+  let totalCounter = 0;
+
+  // Задаем каждому элементу случайное позиционирование
+  elements.forEach(function (item) {
     getRandomCoordinates(0, getHeight, 0, getWidth, elements);
-    console.log(`item: ${item} --- value: ${value}`);
-    item.style.cssText = `top: ${randomY}px; left: ${randomX}px`
+    item.style.cssText = `top: ${randomY}px; left: ${randomX}px`;
+    item.textContent = item.getAttribute('data-score');
+    item.addEventListener('click', clickCounter);
   })
   
-  // while (i < elements.length) {
-  //   getRandomCoordinates(0, getHeight, 0, getWidth, elements);
-  //   console.log(randomY, randomX);
+  // Клик по элементам и вывод набранных баллов
+  function clickCounter() {
+    // console.log(this);
+    totalCounter = +this.getAttribute('data-score')
+    // console.log(totalCounter);
+    counter += totalCounter;
+    totalInput.value = counter;
 
-  //   console.log(elements[i]);
-  //   elements[i].style.cssText = `top: ${randomY}px; left: ${randomX}px`
-  //   i++;
-  // }
+    if (totalInput.value > 150) {
+      alert('Congratulations!')
+    }
+  }
