@@ -8,7 +8,7 @@ let getWidth      = document.body.clientWidth, // Получаем ширину 
 getHeight     = window.innerHeight, //Получаем высоту ус-ва
 windowWidth   = document.getElementById('js-width').textContent = `Width: ${getWidth}`,
 windowHeight  = document.getElementById('js-height').textContent = `Heigth: ${getHeight}`,
-elements      = document.querySelectorAll('.boxTest'); //Игровые элементы
+elements      = document.querySelectorAll('.boxMaster'); //Игровые элементы
 
 /**
 * ф-я getRandomCoordinates(minY, maxY, minX, maxX) - генерирует случайные числа для координат х, у и записывает в переменные randomY, randomX
